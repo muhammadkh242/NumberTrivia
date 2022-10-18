@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:nums/common/api/api_config.dart';
 import 'package:nums/features/number_trivia/data/models/number_trivia.dart';
-
 import '../../features/base/domain/entities/base_api_result.dart';
 
 class ApiMethods<T> {
@@ -24,6 +23,7 @@ class ApiMethods<T> {
   }
 
   R? _dataFromJson<R>(dynamic data) {
+    //switch cases on different types should be here
     if (R == NumberTrivia) {
       return NumberTrivia.fromJson(data) as R;
     }
@@ -47,9 +47,13 @@ class ApiMethods<T> {
         return BaseApiResult<E>(
             errorType: ErrorType.notAuthorized, errorMessage: "Not Authorized");
       case SERVER_ERROR:
-        return BaseApiResult<E>(errorType: ErrorType.generalError);
+        return BaseApiResult<E>(
+            errorType: ErrorType.generalError,
+            errorMessage: "Something went wrong!");
       default:
-        return BaseApiResult<E>(errorType: ErrorType.generalError);
+        return BaseApiResult<E>(
+            errorType: ErrorType.generalError,
+            errorMessage: "Something went wrong!");
     }
   }
 
