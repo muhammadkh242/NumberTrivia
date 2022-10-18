@@ -13,4 +13,5 @@ class NumberTriviaViewModel extends StateNotifier<BaseState<NumberTrivia>> {
       : super(BaseState(data: null));
 
 
+
 }
