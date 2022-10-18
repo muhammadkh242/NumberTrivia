@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
+import 'package:nums/common/injection_container.dart' as di;
+import 'package:nums/features/base/domain/entities/base_state.dart';
+import 'package:nums/features/number_trivia/data/models/number_trivia.dart';
 import 'package:nums/features/number_trivia/presentation/widgets/content_display.dart';
-
+import '../view_models/number_trivia_view_model.dart';
 import '../widgets/numbers_button.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _viewModelProvider =
+      StateNotifierProvider<NumberTriviaViewModel, BaseState<NumberTrivia>>(
+          (ref) {
+    return NumberTriviaViewModel(ref.watch(di.getConcreteNumberProvider),
+        ref.watch(di.getRandomNumberProvider));
+  });
 
   @override
   Widget build(BuildContext context) {
