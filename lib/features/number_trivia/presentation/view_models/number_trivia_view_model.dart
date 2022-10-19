@@ -22,6 +22,7 @@ class NumberTriviaViewModel
     if (result.data != null) {
       state = state.copyWith(data: result.data, isLoading: false);
     } else if (result.errorMessage != null) {
+      state = state.copyWith(isLoading: false);
       showSnackBar(result.errorMessage!);
     }
   }
@@ -33,6 +34,7 @@ class NumberTriviaViewModel
       if (result.data != null) {
         state = state.copyWith(data: result.data, isLoading: false);
       } else if (result.errorMessage != null) {
+        state = state.copyWith(isLoading: false);
         showSnackBar(result.errorMessage!);
       }
     }

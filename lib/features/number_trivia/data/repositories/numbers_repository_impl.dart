@@ -37,15 +37,15 @@ class NumbersRepositoryImpl implements NumbersRepository {
   Future<BaseApiResult<NumberTrivia?>> _getNumberTrivia(
       Function getNumberTrivia) async {
     if (await connectionInfo.isConnected) {
-      print("connection");
       final numberFromNetwork = await getNumberTrivia();
       numbersLocalDataSource.saveNumberTrivia(numberFromNetwork.data);
       return numberFromNetwork;
     } else {
-      print("noconnection");
       final numberFromLocal = numbersLocalDataSource.getLastNumberTrivia();
-      print(numberFromLocal!.number);
-      return BaseApiResult(data: numberFromLocal);
+
+      return BaseApiResult(
+          data: numberFromLocal,
+          errorMessage: numberFromLocal != null ? null : "No Connection");
     }
   }
 }

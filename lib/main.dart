@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
+import 'package:nums/common/constants.dart';
 import 'package:nums/features/number_trivia/presentation/screens/home_screen.dart';
 import 'package:nums/common/injection_container.dart' as di;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: Constants.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
