@@ -11,6 +11,6 @@ class NumberTrivia {
 
   Map<String, dynamic> toJson() => {
         'text': text,
-        'number': number,
+        'number': number.toString(),
       };
 }

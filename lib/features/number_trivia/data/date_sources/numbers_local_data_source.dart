@@ -15,6 +15,7 @@ class NumbersLocalDataSource {
 
   NumberTrivia? getLastNumberTrivia() {
     final lastNumberString = preferences.getString(CACHED_NUMBER_TRIVIA);
+    print(lastNumberString);
     if (lastNumberString != null) {
       return NumberTrivia.fromJson(json.decode(lastNumberString));
     } else {
