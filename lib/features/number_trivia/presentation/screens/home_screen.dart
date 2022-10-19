@@ -25,40 +25,46 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const ContentDisplay(),
-            const SizedBox(
-              height: 30,
-            ),
-            const TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              ContentDisplay(viewModelProvider: _viewModelProvider,),
+              const SizedBox(
+                height: 30,
               ),
-            ),
-            const SizedBox(
-              height: 60,
-            ),
-            Row(
-              children: [
-                Expanded(
-                    child: NumbersButton(
-                  text: "Search",
-                  onTap: () {},
-                )),
-                const SizedBox(
-                  width: 20,
+              const TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
                 ),
-                Expanded(
-                    child: NumbersButton(
-                  text: "Random",
-                  onTap: () {},
-                ))
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(
+                height: 60,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      child: NumbersButton(
+                    text: "Search",
+                    onTap: () {},
+                  )),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                      child: NumbersButton(
+                    text: "Random",
+                    onTap: () {
+                      context
+                          .read(_viewModelProvider.notifier)
+                          .getRandomNumberTrivia();
+                    },
+                  ))
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

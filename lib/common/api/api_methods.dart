@@ -24,8 +24,12 @@ class ApiMethods<T> {
 
   R? _dataFromJson<R>(dynamic data) {
     //switch cases on different types should be here
+    print(data);
+    String number = (data as String).substring(0, data.indexOf(" "));
+    String text = (data.substring(data.indexOf(" "), data.length - 1));
+    Map<String, dynamic> jsonStr = {'number': number, 'text': text};
     if (R == NumberTrivia) {
-      return NumberTrivia.fromJson(data) as R;
+      return NumberTrivia.fromJson(jsonStr) as R;
     }
     return null;
   }

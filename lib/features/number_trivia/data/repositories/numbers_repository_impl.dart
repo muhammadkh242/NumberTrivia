@@ -38,7 +38,7 @@ class NumbersRepositoryImpl implements NumbersRepository {
       Function getNumberTrivia) async {
     if (await connectionInfo.isConnected) {
       final numberFromNetwork = await getNumberTrivia();
-      numbersLocalDataSource.saveNumberTrivia(numberFromNetwork);
+      numbersLocalDataSource.saveNumberTrivia(numberFromNetwork.data);
       return numberFromNetwork;
     } else {
       final numberFromLocal = numbersLocalDataSource.getLastNumberTrivia();

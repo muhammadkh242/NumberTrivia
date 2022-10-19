@@ -6,7 +6,7 @@ class NumberTrivia {
 
   factory NumberTrivia.fromJson(Map<String, dynamic> json) => NumberTrivia(
         text: json['text'],
-        number: (json['number'] as num).toInt(),
+        number: num.parse(json['number']).toInt(),
       );
 
   Map<String, dynamic> toJson() => {
