@@ -7,7 +7,7 @@ import '../../../base/domain/entities/base_api_result.dart';
 class NumbersNetworkDataSource {
   Future<BaseApiResult<NumberTrivia>> getConcreteNumberTrivia(
           int number) async =>
-      await ApiMethods<NumberTrivia>().get(ApiUrls.BASE_URL, null);
+      await ApiMethods<NumberTrivia>().get(ApiUrls.BASE_URL, null, number);
 
   Future<BaseApiResult<NumberTrivia>> getRandomNumberTrivia() async =>
       await ApiMethods<NumberTrivia>().get(ApiUrls.RANDOM_NUM_URL, null);

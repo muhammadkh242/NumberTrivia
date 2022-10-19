@@ -22,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ref.watch(di.getRandomNumberProvider));
   });
 
+  TextEditingController textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +32,18 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              ContentDisplay(viewModelProvider: _viewModelProvider,),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40),
+                child: ContentDisplay(
+                  viewModelProvider: _viewModelProvider,
+                ),
+              ),
               const SizedBox(
                 height: 30,
               ),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: textEditingController,
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -47,7 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                       child: NumbersButton(
                     text: "Search",
-                    onTap: () {},
+                    onTap: () {
+                      context
+                          .read(_viewModelProvider.notifier)
+                          .getConcreteNumberTrivia(
+                              textEditingController.text.trim());
+                    },
                   )),
                   const SizedBox(
                     width: 20,
@@ -59,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       context
                           .read(_viewModelProvider.notifier)
                           .getRandomNumberTrivia();
+                      textEditingController.clear();
                     },
                   ))
                 ],

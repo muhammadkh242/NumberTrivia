@@ -4,7 +4,13 @@ import 'package:nums/features/number_trivia/data/models/number_trivia.dart';
 import '../../features/base/domain/entities/base_api_result.dart';
 
 class ApiMethods<T> {
-  Future<BaseApiResult<T>> get(String url, Map<String, String>? params) async {
+  Future<BaseApiResult<T>> get(String url, Map<String, String>? params,
+      [int? concreteNumber]) async {
+    if (concreteNumber != null) {
+      ApiConfig.dio.options.extra.addAll({CONCRETE_NUMBER: concreteNumber});
+    } else {
+      ApiConfig.dio.options.extra[CONCRETE_NUMBER] = null;
+    }
     try {
       Response response = await ApiConfig.dio.get(url, queryParameters: params);
       return _handleResponse(response);
@@ -23,8 +29,6 @@ class ApiMethods<T> {
   }
 
   R? _dataFromJson<R>(dynamic data) {
-    //switch cases on different types should be here
-    print(data);
     String number = (data as String).substring(0, data.indexOf(" "));
     String text = (data.substring(data.indexOf(" "), data.length - 1));
     Map<String, dynamic> jsonStr = {'number': number, 'text': text};
