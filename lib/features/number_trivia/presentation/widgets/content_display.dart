@@ -3,13 +3,14 @@ import 'package:flutter_riverpod/all.dart';
 import 'package:nums/features/number_trivia/presentation/widgets/number_info.dart';
 import '../../../base/domain/entities/base_state.dart';
 import '../../data/models/number_trivia.dart';
+import '../../domain/entities/number_trivia_state.dart';
 import '../view_models/number_trivia_view_model.dart';
 
 class ContentDisplay extends StatelessWidget {
   const ContentDisplay({Key? key, required this.viewModelProvider})
       : super(key: key);
-  final StateNotifierProvider<NumberTriviaViewModel, BaseState<NumberTrivia>>
-      viewModelProvider;
+  final StateNotifierProvider<NumberTriviaViewModel,
+      NumberTriviaState<NumberTrivia>> viewModelProvider;
 
   @override
   Widget build(BuildContext context) {

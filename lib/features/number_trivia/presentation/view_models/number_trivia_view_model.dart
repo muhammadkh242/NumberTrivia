@@ -15,6 +15,8 @@ class NumberTriviaViewModel
       : super(NumberTriviaState(data: null));
 
   getRandomNumberTrivia() async {
+    state = state.copyWith(emptyNumber: false, invalidNumber: false);
+
     state = state.copyWith(isLoading: true);
     final result = await _getRandomNumberTrivia.call();
     if (result.data != null) {
@@ -24,10 +26,10 @@ class NumberTriviaViewModel
     }
   }
 
-  getConcreteNumberTrivia(String? number) async {
+  getConcreteNumberTrivia(String number) async {
     if (isValidNumber(number)) {
       state = state.copyWith(isLoading: true);
-      final result = await _getConcreteNumberTrivia.call(int.parse(number!));
+      final result = await _getConcreteNumberTrivia.call(int.parse(number));
       if (result.data != null) {
         state = state.copyWith(data: result.data, isLoading: false);
       } else if (result.errorMessage != null) {
@@ -36,12 +38,15 @@ class NumberTriviaViewModel
     }
   }
 
-  bool isValidNumber(String? number) {
-    if (number == null) {
+  bool isValidNumber(String number) {
+    state = state.copyWith(emptyNumber: false, invalidNumber: false);
+
+    if (number.isEmpty) {
       state = state.copyWith(emptyNumber: true);
       return false;
     } else if (int.tryParse(number) == null) {
       state = state.copyWith(invalidNumber: true);
+
       return false;
     }
     return true;
