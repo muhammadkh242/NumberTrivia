@@ -1,6 +1,6 @@
 
-Simple single screen mobile application
+Simple single screen mobile application,
 Flutter clean architecture proof of concept
 
-#API
+## API
 http://numbersapi.com
